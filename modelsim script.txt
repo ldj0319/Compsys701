@@ -1,0 +1,40 @@
+quit -sim;
+cd <FILEPATH>
+sccom -reportprogress -work work DCT/DCT.cpp;
+sccom -reportprogress -work work DCT/ycbcr.cpp;
+sccom -reportprogress -work work Memory/memory.cpp;
+sccom -reportprogress -work work common.cpp;
+sccom -reportprogress -work work quantisation.cpp;
+sccom -reportprogress -work work encoding.cpp;
+sccom -reportprogress -work work decoding.cpp;
+sccom -reportprogress -work work dequantise.cpp;
+sccom -reportprogress -work work top.cpp;
+sccom -link -work work;
+vsim -novopt work.top;
+add wave -position end  sim:/top/clock.m_cur_val
+add wave -position end  sim:/top/fifoR(0)
+add wave -position end  sim:/top/fifoG(0)
+add wave -position end  sim:/top/fifoB(0)
+add wave -position end  sim:/top/fifoY(0)
+add wave -position end  sim:/top/fifoCb(0)
+add wave -position end  sim:/top/fifoCr(0)
+add wave -position end  sim:/top/fifoYDCT(0)
+add wave -position end  sim:/top/fifoCbDCT(0)
+add wave -position end  sim:/top/fifoCrDCT(0)
+add wave -position end  sim:/top/fifoYToInverse(0)
+add wave -position end  sim:/top/fifoCbToInverse(0)
+add wave -position end  sim:/top/fifoCrToInverse(0)
+add wave -position end  sim:/top/fifoRToInverse(0)
+add wave -position end  sim:/top/fifoGToInverse(0)
+add wave -position end  sim:/top/fifoBToInverse(0)
+add wave -position end  sim:/top/readerDone
+add wave -position end  sim:/top/writerDone
+add wave -position end  sim:/top/dctYDone
+add wave -position end  sim:/top/quant_YDone
+add wave -position end  sim:/top/encoding_YDone
+add wave -position end  sim:/top/decoding_YDone
+add wave -position end  sim:/top/dequant_YDone
+add wave -position end  sim:/top/idctYDone
+run 3 ms;
+radix decimal;
+wave zoom full;
